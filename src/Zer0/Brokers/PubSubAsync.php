@@ -23,11 +23,21 @@ class PubSubAsync extends Base
 
     /**
      * @param ConfigInterface $config
-     * @return object
+     * @return \Zer0\PubSub\Pools\BaseAsync
      */
-    public function instantiate(ConfigInterface $config)
+    public function instantiate(ConfigInterface $config): \Zer0\PubSub\Pools\BaseAsync
     {
         $class = ClassFinder::find($config->type . 'Async', ClassFinder::getNamespace(\Zer0\PubSub\Pools\BaseAsync::class), '~');
         return new $class($config, $this->app);
+    }
+    
+    /**
+     * @param string $name
+     * @param bool $caching
+     * @return \Zer0\PubSub\Pools\BaseAsync
+     */
+    public function get(string $name = '', bool $caching = true): \Zer0\PubSub\Pools\BaseAsync
+    {
+        return parent::get($name, $caching);
     }
 }

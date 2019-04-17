@@ -13,11 +13,21 @@ class PubSub extends Base
 {
     /**
      * @param ConfigInterface $config
-     * @return object
+     * @return \Zer0\PubSub\Pools\Base
      */
-    public function instantiate(ConfigInterface $config)
+    public function instantiate(ConfigInterface $config): \Zer0\PubSub\Pools\Base
     {
         $class = ClassFinder::find($config->type, ClassFinder::getNamespace(\Zer0\PubSub\Pools\Base::class), '~');
         return new $class($config, $this->app);
+    }
+
+    /**
+     * @param string $name
+     * @param bool $caching
+     * @return \Zer0\PubSub\Pools\Base
+     */
+    public function get(string $name = '', bool $caching = true): \Zer0\PubSub\Pools\Base
+    {
+        return parent::get($name, $caching);
     }
 }
