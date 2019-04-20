@@ -10,14 +10,14 @@
 
 ### Рассылка
 ```php
-$pubsub = $this->app->broker('PubSub')->get();
+$pubsub = $this->app->factory('PubSub');
 $pubsub->publish(new \Zer0\PubSub\Message('someChannel', 'Hello world!'));
 ```
 
 ### Подписка (асинхронный вариант)
 
 ```php
-$pubsub = $this->app->broker('PubSubAsync')->get();
+$pubsub = $this->app->factory('PubSubAsync');
 
 // Подписка на определенный канал
 $pubsub->subscribe('someChannel', function ($payload, string $chan) {
